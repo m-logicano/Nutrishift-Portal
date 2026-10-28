@@ -9,7 +9,7 @@ interface ERPLoginResponse {
 }
 
 export async function loginWithERPNext(email: string, password: string): Promise<NutriUser | null> {
-  const baseUrl = process.env.ERPNEXT_URL?.replace(/\/$/, '') || 'https://erp.nutri-shift.com';
+  const baseUrl = process.env.ERPNEXT_URL?.replace(/\/$/, '') || 'https://erpn.nutri-shift.com';
   const cleanEmail = email.toLowerCase().trim();
 
   try {

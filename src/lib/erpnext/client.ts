@@ -36,7 +36,7 @@ export async function erpFetch<T>(
     ...fetchOptions
   } = options;
 
-  const baseUrl = process.env.ERPNEXT_URL?.replace(/\/$/, '') || 'https://erp.nutri-shift.com';
+  const baseUrl = process.env.ERPNEXT_URL?.replace(/\/$/, '') || 'https://erpn.nutri-shift.com';
   const url = `${baseUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
 
   // Resolve authorization credentials
