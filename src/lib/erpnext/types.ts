@@ -17,27 +17,65 @@ export const PatientDocSchema = z.object({
   sex: z.string().optional().nullable(),
   dob: z.string().optional().nullable(),
   blood_group: z.string().optional().nullable(),
+  country: z.string().optional().nullable(),
+  status: z.string().default('Active'),
+  primary_healthcare_practitioner: z.string().optional().nullable(),
   custom_subscription_tier: z.enum(['free', 'paid', 'admin']).default('free'),
+  creation: z.string().optional(),
 });
 
 export type PatientDoc = z.infer<typeof PatientDocSchema>;
 
-// Appointment DocType Schema
+// Patient Appointment & Encounter Schema
 export const AppointmentDocSchema = z.object({
   name: z.string(),
   patient: z.string(),
   patient_name: z.string().optional(),
-  appointment_date: z.string(),
-  appointment_time: z.string(),
-  status: z.enum(['Scheduled', 'Open', 'Closed', 'Cancelled']).default('Scheduled'),
-  practitioner: z.string().optional(),
-  department: z.string().optional(),
+  appointment_date: z.string().optional(),
+  appointment_time: z.string().optional(),
+  encounter_date: z.string().optional(),
+  encounter_time: z.string().optional(),
+  practitioner_name: z.string().optional().nullable(),
+  status: z.string().default('Open'),
+  google_meet_link: z.string().optional().nullable(),
+  clinical_notes: z.string().optional().nullable(),
   notes: z.string().optional().nullable(),
 });
 
 export type AppointmentDoc = z.infer<typeof AppointmentDocSchema>;
 
-// Diet Plan DocType Schema
+// Vital Signs & Measurements Schema
+export const VitalSignsDocSchema = z.object({
+  name: z.string(),
+  patient: z.string(),
+  signs_date: z.string(),
+  signs_time: z.string().optional().nullable(),
+  weight: z.number().optional().nullable(),
+  height: z.number().optional().nullable(),
+  bmi: z.number().optional().nullable(),
+  upper_waist: z.union([z.number(), z.string()]).optional().nullable(),
+  lower_waist: z.union([z.number(), z.string()]).optional().nullable(),
+  waist_to_height_ratio: z.union([z.number(), z.string()]).optional().nullable(),
+  bmi_class: z.string().optional().nullable(),
+  body_mass_classification: z.string().optional().nullable(),
+  vital_signs_note: z.string().optional().nullable(),
+  nutrition_note: z.string().optional().nullable(),
+  creation: z.string().optional(),
+});
+
+export type VitalSignsDoc = z.infer<typeof VitalSignsDocSchema>;
+
+// Clinical File Attachment Schema (e.g. Diet Plan PDFs, Lab results)
+export const ClinicalFileSchema = z.object({
+  name: z.string(),
+  file_name: z.string(),
+  file_url: z.string(),
+  creation: z.string().optional(),
+});
+
+export type ClinicalFile = z.infer<typeof ClinicalFileSchema>;
+
+// Diet Plan Protocol Schema
 export const DietPlanItemSchema = z.object({
   food_name: z.string(),
   quantity: z.number().default(1),
@@ -53,7 +91,7 @@ export const DietPlanMealSchema = z.object({
 export const DietPlanDocSchema = z.object({
   name: z.string(),
   patient: z.string(),
-  title: z.string().default('Diet Plan'),
+  title: z.string().default('Personalized Clinical Nutrition Plan'),
   from_date: z.string().optional(),
   to_date: z.string().optional(),
   calories_target: z.number().optional().nullable(),
@@ -61,19 +99,3 @@ export const DietPlanDocSchema = z.object({
 });
 
 export type DietPlanDoc = z.infer<typeof DietPlanDocSchema>;
-
-// Patient Measurements / Vital Signs Schema
-export const VitalSignsDocSchema = z.object({
-  name: z.string(),
-  patient: z.string(),
-  signs_date: z.string(),
-  signs_time: z.string().optional(),
-  height: z.number().optional().nullable(),
-  weight: z.number().optional().nullable(),
-  bmi: z.number().optional().nullable(),
-  bp_systolic: z.number().optional().nullable(),
-  bp_diastolic: z.number().optional().nullable(),
-  pulse: z.number().optional().nullable(),
-});
-
-export type VitalSignsDoc = z.infer<typeof VitalSignsDocSchema>;
