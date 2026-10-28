@@ -1,7 +1,9 @@
-# Nutrishift Patient Portal (Next.js 16 Standalone)
+# Nutrishift-Portal (Next.js 16 Standalone)
 
 > **Enterprise-grade, safety-first client & patient portal for Nutrishift Clinical Nutrition.**  
 > Built as a fully decoupled Backend-for-Frontend (BFF) orchestrating ERPNext (Marley HMS) clinical records, Ghost CMS educational content, and future payment gateways without microservice sync overhead.
+>
+> 📁 **Detailed Architecture & Decisions**: See the [`project-docs/`](./project-docs/) directory for complete system blueprints, decision matrices, and opinion validation records.
 
 ---
 
